@@ -1,0 +1,6 @@
+weaviate-client
+langchain_weaviate
+langchain_huggingface
+langchain_core
+langchain_openai
+python-dotenv

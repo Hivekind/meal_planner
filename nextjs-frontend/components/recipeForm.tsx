@@ -9,18 +9,15 @@ const RecipeForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here and set the output
-    try {
-      const response = await fetch(
-        "http://localhost:3001/queries/get_query_results"
-      );
-      const data = await response.json();
-      console.log("Server response:", data);
-      setOutput(data.query_results); // Example output
-    } catch (error) {
-      console.error("Error:", error);
-    }
-    console.log("Submitted:", inputValue);
+
+    const query = encodeURIComponent(inputValue);
+    const url = `http://localhost:3001/queries/get_query_results?query=${query}`;
+    const response = await fetch(url, {
+      method: "GET",
+    });
+    const data = await response.json();
+    console.log("Server response:", data);
+    setOutput(data.query_results);
   };
 
   const shareRecipe = () => {
@@ -44,8 +41,8 @@ const RecipeForm = () => {
       {output && (
         <div className="mt-5 flex gap-4 w-full">
           <div className="w-1/2">
-            <b>Output:</b>
-            <p>{output}</p>
+            <b className="mb-3">Output:</b>
+            <pre>{output}</pre>
           </div>
           <Button onClick={shareRecipe}>Share Recipe</Button>
         </div>
