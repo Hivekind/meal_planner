@@ -1,6 +1,12 @@
 class QueriesController < ApplicationController
   before_action :set_query, only: %i[ show update destroy ]
 
+  def get_query_results
+    # Get query results from python script
+    query_results = "Something"
+    render json: { query_results: query_results } 
+  end
+
   # GET /queries
   def index
     @queries = Query.all

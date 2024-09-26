@@ -7,10 +7,19 @@ const RecipeForm = () => {
   const [inputValue, setInputValue] = useState("");
   const [output, setOutput] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission logic here and set the output
-    setOutput(inputValue); // Example output
+    try {
+      const response = await fetch(
+        "http://localhost:3001/queries/get_query_results"
+      );
+      const data = await response.json();
+      console.log("Server response:", data);
+      setOutput(data.query_results); // Example output
+    } catch (error) {
+      console.error("Error:", error);
+    }
     console.log("Submitted:", inputValue);
   };
 
