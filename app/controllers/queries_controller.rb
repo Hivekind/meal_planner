@@ -1,11 +1,14 @@
+require "shellwords"
+
 class QueriesController < ApplicationController
   before_action :set_query, only: %i[ show update destroy ]
 
   def get_query_results
     # Retrieve the query results by executing a Python script with the given query.
-    query_results = `python3 lib/tasks/query_result.py "#{params[:query]}"`
-    
-    render json: { query_results: query_results } 
+    query = Shellwords.escape(params[:query])
+    query_results = system("python3 lib/tasks/query_result.py #{query}")
+
+    render json: { query_results: query_results }
   end
 
   # GET /queries
