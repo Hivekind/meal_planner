@@ -2,6 +2,8 @@
 
 In this project, we are using ruby on rails for backend, nextjs for frontend and python script for working with AI related stuff like embeddings, RAG chain etc.
 
+![Meal Planner UI](./public/images/meal_planner.png)
+
 ## Prerequisits:
 
 - Ruby 3.3.0
